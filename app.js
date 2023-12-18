@@ -45,6 +45,14 @@ app.use(cookieParser()).use(morganmiddleware);
 app.use(passport.initialize());
 app.use(express.static(__dirname + "/client/public"));
 
+const session = require('express-session');
+
+app.use(session({
+  secret: 'your_secret', // Replace 'your_secret' with a real secret key
+  resave: false,
+  saveUninitialized: false
+}));
+
 const resolvedPath = path.resolve(__dirname + "/client/public/index.html");
 
 passport.serializeUser(function (user, done) {
